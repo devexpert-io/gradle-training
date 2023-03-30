@@ -14,3 +14,10 @@ tasks.register('sayHello') {
         println "Hello from Gradle!"
     }
 }
+
+tasks.register('sayGoodbye') {
+    dependsOn sayHello
+    doLast {
+        println "Goodbye from Gradle!"
+    }
+}
