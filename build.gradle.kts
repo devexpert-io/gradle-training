@@ -30,25 +30,25 @@ tasks.withType<DependencyUpdatesTask> {
     }
 }
 
-tasks.register("sayHello") {
+val sayHello by tasks.registering {
     doLast {
         println("Hello from Gradle!")
     }
 }
 
-tasks.register("sayGoodbye") {
-    dependsOn("sayHello")
+val sayGoodbye by tasks.registering {
+    dependsOn(sayHello)
     doLast {
         println("Goodbye from Gradle!")
     }
 }
 
-tasks.register("deleteZip", Delete::class) {
+val deleteZip by tasks.registering(Delete::class) {
     delete("build/project.zip")
 }
 
-tasks.register("zipProject", Zip::class) {
-    dependsOn("deleteZip")
+val zipProject by tasks.registering(Zip::class) {
+    dependsOn(deleteZip)
     from(".")
     destinationDirectory.set(file("build"))
     archiveFileName.set("project.zip")
