@@ -2,6 +2,7 @@
 plugins {
     alias libs.plugins.com.android.application
     alias libs.plugins.org.jetbrains.kotlin.android
+    alias libs.plugins.com.github.triplet.play
 }
 
 
@@ -22,6 +23,20 @@ android {
         }
     }
 
+    // Load keystore
+    def keystorePropertiesFile = rootProject.file("keystore.properties")
+    def keystoreProperties = new Properties()
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file("../${keystoreProperties['storeFile']}")
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+
     buildTypes {
         beta {
             minifyEnabled false
@@ -29,10 +44,13 @@ android {
         }
 
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
+
+    // Create a product
 
     flavorDimensions = ['version', 'abi', 'server']
     productFlavors {
@@ -87,6 +105,10 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+}
+
+play {
+    serviceAccountCredentials.set(file("../service-key.json"))
 }
 
 dependencies {

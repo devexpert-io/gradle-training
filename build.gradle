@@ -4,6 +4,7 @@ plugins {
     alias libs.plugins.org.jetbrains.kotlin.android apply false
     alias libs.plugins.com.github.ben.manes.versions
     alias libs.plugins.nl.littlerobots.version.catalog.update
+    alias libs.plugins.com.github.triplet.play apply false
 }
 
 // https://github.com/ben-manes/gradle-versions-plugin
