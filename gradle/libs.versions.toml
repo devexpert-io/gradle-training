@@ -1,0 +1,11 @@
+[versions]
+androidx-core-ktx = '1.12.0'
+android-gradle-plugin = '8.1.2'
+
+
+[libraries]
+androidx-core-core-ktx = { module = 'androidx.core:core-ktx', version.ref = 'androidx-core-ktx' }
+
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
