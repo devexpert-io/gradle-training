@@ -93,10 +93,7 @@ dependencies {
     // Bug https://youtrack.jetbrains.com/issue/IDEA-316687/Groovy-warn-incorrectly-about-version-catalog-dependency
     implementation libs.androidx.core.core.ktx
     implementation libs.androidx.lifecycle.lifecycle.runtime.ktx
-    implementation libs.androidx.activity.activity.compose
-    implementation libs.androidx.compose.ui
-    implementation libs.androidx.compose.ui.ui.tooling.preview
-    implementation libs.androidx.compose.material
+    implementation libs.bundles.androidx.compose
     testImplementation libs.junit
     androidTestImplementation libs.androidx.test.ext.junit
     androidTestImplementation libs.androidx.test.espresso.espresso.core
