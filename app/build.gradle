@@ -21,11 +21,52 @@ android {
     }
 
     buildTypes {
+        beta {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions = ['version', 'abi', 'server']
+    productFlavors {
+        free {
+            dimension 'version'
+        }
+        premium {
+            dimension 'version'
+            applicationIdSuffix '.premium'
+        }
+
+        arm {
+            dimension 'abi'
+        }
+        arm64 {
+            dimension 'abi'
+        }
+        x86 {
+            dimension 'abi'
+        }
+
+        dev {
+            dimension 'server'
+            applicationIdSuffix '.dev'
+        }
+        staging {
+            dimension 'server'
+            applicationIdSuffix '.staging'
+
+        }
+        prod {
+            dimension 'server'
+            applicationIdSuffix '.prod'
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
