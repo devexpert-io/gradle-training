@@ -32,7 +32,7 @@ tasks.withType<DependencyUpdatesTask> {
 
 val sayHello by tasks.registering {
     doLast {
-        println("Hello from Gradle!")
+        println("Hello from Gradle! Today is ${today()}")
     }
 }
 
