@@ -36,54 +36,30 @@ android {
         create("beta") {
             isMinifyEnabled = false
             proguardFiles(
-                    getDefaultProguardFile("proguard-android-optimize.txt"),
-                    "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
             )
         }
 
         release {
             isMinifyEnabled = true
             proguardFiles(
-                    getDefaultProguardFile("proguard-android-optimize.txt"),
-                    "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
             )
             signingConfig = signingConfigs.getByName("release")
         }
     }
 
     // Create product flavors
-    flavorDimensions.addAll(listOf("version", "abi", "server"))
+    flavorDimensions.addAll(ProductDimensions.list)
 
     productFlavors {
-        create("free") {
-            dimension = "version"
-        }
-        create("premium") {
-            dimension = "version"
-            applicationIdSuffix = ".premium"
-        }
-
-        create("arm") {
-            dimension = "abi"
-        }
-        create("arm64") {
-            dimension = "abi"
-        }
-        create("x86") {
-            dimension = "abi"
-        }
-
-        create("dev") {
-            dimension = "server"
-            applicationIdSuffix = ".dev"
-        }
-        create("staging") {
-            dimension = "server"
-            applicationIdSuffix = ".staging"
-        }
-        create("prod") {
-            dimension = "server"
-            applicationIdSuffix = ".prod"
+        ProductFlavors.variants.forEach { flavor ->
+            create(flavor.name) {
+                dimension = flavor.dimension
+                flavor.suffix?.let { applicationIdSuffix = it }
+            }
         }
     }
 
