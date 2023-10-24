@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.com.github.ben.manes.versions)
     alias(libs.plugins.nl.littlerobots.version.catalog.update)
     alias(libs.plugins.com.github.triplet.play) apply false
+    alias(libs.plugins.com.devexperto.customplugin)
 }
 
 fun isNonStable(version: String): Boolean {
@@ -28,29 +29,4 @@ tasks.withType<DependencyUpdatesTask> {
             }
         }
     }
-}
-
-val sayHello by tasks.registering {
-    doLast {
-        println("Hello from Gradle! Today is ${today()}")
-    }
-}
-
-val sayGoodbye by tasks.registering {
-    dependsOn(sayHello)
-    doLast {
-        println("Goodbye from Gradle!")
-    }
-}
-
-val deleteZip by tasks.registering(Delete::class) {
-    delete("build/project.zip")
-}
-
-val zipProject by tasks.registering(Zip::class) {
-    dependsOn(deleteZip)
-    from(".")
-    destinationDirectory.set(file("build"))
-    archiveFileName.set("project.zip")
-    exclude("build/**")
 }
